@@ -7,12 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
 import Zoom from "@material-ui/core/Zoom";
 
 import store from "../store";
+import AddGame from "./AddGame";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -72,10 +70,7 @@ function Games() {
           <AddIcon />
         </Fab>
       </Zoom>
-      <Dialog onClose={handleClose} open={show}>
-        <DialogTitle>Set backup account</DialogTitle>
-        <DialogContent>coucou</DialogContent>
-      </Dialog>
+      <AddGame onClose={handleClose} open={show} />
     </>
   );
 }

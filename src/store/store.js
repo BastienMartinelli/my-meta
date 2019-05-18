@@ -21,6 +21,16 @@ const reducer = (state, action) => {
         ...state,
         members: state.members.filter(m => m.name !== action.payload)
       };
+    case "@GAMES/ADD":
+      const today = new Date();
+      const newGame = {
+        ...action.payload,
+        date: today.toString()
+      };
+      return {
+        ...state,
+        games: [...state.games, newGame]
+      };
     default:
       return state;
   }
