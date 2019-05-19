@@ -49,7 +49,7 @@ function AddMember({ onClose, open, fullScreen }) {
   function onSubmit() {
     if (name) {
       dispatch({
-        type: "@MEMBERS/ADD",
+        type: "@PLAYERS/ADD",
         payload: { name, avatar: av }
       });
       onClose();

@@ -60,9 +60,16 @@ function Games() {
           </Card>
         ))
       ) : (
-        <Typography variant="h5" component="h2">
-          No past matches
-        </Typography>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography color="textSecondary">No past matches</Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small" color="primary" onClick={handleOpen}>
+              Add a game
+            </Button>
+          </CardActions>
+        </Card>
       )}
       <Zoom
         in

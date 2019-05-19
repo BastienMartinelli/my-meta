@@ -8,28 +8,28 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import Router from "./components/Router";
 import Store, { Persister } from "./store";
 import Games from "./screens/Games";
-import Members from "./screens/Members";
+import Playgroup from "./screens/Playgroup";
 import theme from "./utils/theme";
 
 const routes = {
   games: {
     value: "games",
     label: "Games",
-    long: "Games history",
+    long: "Games History",
     Screen: Games,
     icon: <Restore />
   },
-  members: {
-    value: "members",
-    label: "Members",
-    long: "My team members",
-    Screen: Members,
+  playgroup: {
+    value: "playgroup",
+    label: "Playgroup",
+    long: "My Playgroup",
+    Screen: Playgroup,
     icon: <People />
   },
   stats: {
     value: "stats",
     label: "Stats",
-    long: "Game statistics",
+    long: "Game Statistics",
     Screen: () => <div>Stats</div>,
     icon: <TrendingUp />
   }

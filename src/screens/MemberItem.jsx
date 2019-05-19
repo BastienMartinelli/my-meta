@@ -21,7 +21,7 @@ function MemberItem({ name, avatar }) {
 
   function handleDelete() {
     dispatch({
-      type: "@MEMBERS/DELETE",
+      type: "@PLAYERS/DELETE",
       payload: name
     });
   }

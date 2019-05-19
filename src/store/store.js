@@ -2,7 +2,7 @@ import createStore from "./createStore";
 
 const initial = {
   games: [],
-  members: []
+  players: []
 };
 
 const reducer = (state, action) => {
@@ -11,15 +11,15 @@ const reducer = (state, action) => {
       return {
         ...action.payload
       };
-    case "@MEMBERS/ADD":
+    case "@PLAYERS/ADD":
       return {
         ...state,
-        members: [...state.members, action.payload]
+        players: [...state.players, action.payload]
       };
-    case "@MEMBERS/DELETE":
+    case "@PLAYERS/DELETE":
       return {
         ...state,
-        members: state.members.filter(m => m.name !== action.payload)
+        players: state.players.filter(m => m.name !== action.payload)
       };
     case "@GAMES/ADD":
       const today = new Date();
