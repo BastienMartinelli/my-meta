@@ -17,12 +17,18 @@ const useStyles = makeStyles(() => ({
     margin: 20
   },
   fab: {
-    position: "absolute",
+    position: "fixed",
     right: 0,
     bottom: 60,
     margin: 10
   }
 }));
+
+function winner(players) {
+  const winners = !!players && players.filter(p => p.winner).map(p => p.player);
+
+  return !!winners && !!winners.length ? `🏆 ${winners.join(" / ")}` : "😐 No winner this time";
+}
 
 function Games() {
   const [{ games }] = store.useStore();
@@ -40,11 +46,11 @@ function Games() {
   return (
     <>
       {games && !!games.length ? (
-        games.map(({ date, winner, players, decks }) => (
+        games.map(({ date, players, decks }) => (
           <Card className={classes.card} key={date}>
             <CardContent>
               <Typography variant="h5" component="h2">
-                {winner}
+                {winner(players)}
               </Typography>
               <Typography color="textSecondary">{date}</Typography>
             </CardContent>

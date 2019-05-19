@@ -9,6 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/styles";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
+import Grow from "@material-ui/core/Grow";
 
 import store from "../store";
 import avatars from "../utils/avatars";
@@ -66,6 +67,7 @@ function AddMember({ onClose, open, fullScreen }) {
       open={open}
       onClose={onClose}
       aria-labelledby="form-dialog-title"
+      TransitionComponent={Grow}
     >
       <DialogTitle id="form-dialog-title">New member</DialogTitle>
       <DialogContent>

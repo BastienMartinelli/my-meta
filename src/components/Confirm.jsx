@@ -5,6 +5,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Grow from "@material-ui/core/Grow";
 
 function Confirm({ onClose, open, onConfirm, text, title }) {
   function onSubmit() {
@@ -13,7 +14,7 @@ function Confirm({ onClose, open, onConfirm, text, title }) {
   }
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={onClose} TransitionComponent={Grow}>
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{text}</DialogContentText>

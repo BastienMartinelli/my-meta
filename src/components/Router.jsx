@@ -9,8 +9,11 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   stickToBottom: {
     width: "100%",
-    position: "fixed",
+    position: "sticky",
     bottom: 0
+  },
+  screen: {
+    minHeight: "calc(100vh - 112px)"
   }
 });
 
@@ -25,15 +28,17 @@ function Router({ defaultRoute, routes }) {
   const { Screen } = routes[route];
 
   return (
-    <div className="App">
-      <AppBar position="static">
+    <>
+      <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             {routes[route].long || routes[route].label}
           </Typography>
         </Toolbar>
       </AppBar>
-      <Screen />
+      <div className={classes.screen}>
+        <Screen />
+      </div>
       <BottomNavigation
         showLabels
         className={classes.stickToBottom}
@@ -49,7 +54,7 @@ function Router({ defaultRoute, routes }) {
           />
         ))}
       </BottomNavigation>
-    </div>
+    </>
   );
 }
 

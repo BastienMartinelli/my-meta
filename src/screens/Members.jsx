@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     margin: 20
   },
   fab: {
-    position: "absolute",
+    position: "fixed",
     right: 0,
     bottom: 60,
     margin: 10
