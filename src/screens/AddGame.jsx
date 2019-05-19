@@ -8,21 +8,23 @@ import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import StarIcon from "@material-ui/icons/Star";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import Chip from "@material-ui/core/Chip";
+import { makeStyles } from "@material-ui/styles";
 
 import store from "../store";
 import AddPlayer from "./AddPlayer";
 
+const useStyles = makeStyles({
+  chip: {
+    marginLeft: 3
+  }
+});
+
 function AddGame({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();
   const [form, setForm] = React.useState({});
+  const classes = useStyles();
 
   const handleAddPlayer = p => {
     let players = form.players || [];
@@ -68,19 +70,11 @@ function AddGame({ onClose, open, fullScreen }) {
         <List component="nav" subheader={<ListSubheader>Players</ListSubheader>}>
           {!!form.players &&
             form.players.map((p, i) => (
-              <ListItem button key={i}>
-                {!!p.winner && (
-                  <ListItemIcon>
-                    <StarIcon color="secondary" />
-                  </ListItemIcon>
-                )}
-                <ListItemText primary={p.player} />
-                <ListItemSecondaryAction>
-                  <IconButton onClick={deletePlayer(p)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+              <Chip
+                className={classes.chip}
+                label={`${p.winner ? "🏆 " : ""}${p.player}`}
+                onDelete={deletePlayer(p)}
+              />
             ))}
         </List>
       </DialogContent>
