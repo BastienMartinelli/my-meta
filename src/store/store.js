@@ -2,7 +2,9 @@ import createStore from "./createStore";
 
 const initial = {
   games: [],
-  players: []
+  players: [],
+  decks: [],
+  notFirstTime: false
 };
 
 const reducer = (state, action) => {
@@ -20,6 +22,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         players: state.players.filter(m => m.name !== action.payload)
+      };
+    case "@DECKS/ADD":
+      return {
+        ...state,
+        decks: [...state.decks, action.payload]
+      };
+    case "@DECKS/DELETE":
+      return {
+        ...state,
+        decks: state.decks.filter(d => d.commander !== action.payload)
+      };
+    case "@APP/FIRST_TIME":
+      return {
+        ...state,
+        notFirstTime: true
       };
     case "@GAMES/ADD":
       const today = new Date();

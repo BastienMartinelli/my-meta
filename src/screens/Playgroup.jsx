@@ -14,6 +14,9 @@ import Tab from "@material-ui/core/Tab";
 
 import store from "../store";
 import AddMember from "./AddMember";
+import AddDeck from "./AddDeck";
+import DeckItem from "./DeckItem";
+
 import MemberItem from "./MemberItem";
 
 const useStyles = makeStyles(() => ({
@@ -32,18 +35,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Playgroup() {
-  const [{ players }] = store.useStore();
+  const [{ players = [], decks = [] }] = store.useStore();
   const [show, setShow] = React.useState(false);
   const [tab, setTab] = React.useState(0);
   const classes = useStyles();
 
-  function handleClose() {
-    setShow(false);
-  }
-
-  function handleOpen() {
-    setShow(true);
-  }
+  const handleShow = type => () => {
+    setShow(type);
+  };
 
   function handleTabChange(e, newTab) {
     setTab(newTab);
@@ -67,7 +66,7 @@ function Playgroup() {
             subheader={
               <ListSubheader className={classes.title} component="div">
                 <Badge badgeContent={players.length} color="primary">
-                  All my meta players
+                  All my playgroup members
                 </Badge>
               </ListSubheader>
             }
@@ -91,11 +90,48 @@ function Playgroup() {
             }}
             unmountOnExit
           >
-            <Fab className={classes.fab} color="primary" onClick={handleOpen}>
+            <Fab className={classes.fab} color="primary" onClick={handleShow("player")}>
               <AddIcon />
             </Fab>
           </Zoom>
-          <AddMember onClose={handleClose} open={show} />
+          <AddMember onClose={handleShow()} open={show === "player"} />
+        </>
+      )}
+      {tab === 1 && (
+        <>
+          <List
+            subheader={
+              <ListSubheader className={classes.title} component="div">
+                <Badge badgeContent={decks.length} color="primary">
+                  All my playgroup decks
+                </Badge>
+              </ListSubheader>
+            }
+          >
+            <Divider />
+            {!!decks &&
+              decks.map(({ commander, colors }) => (
+                <DeckItem commander={commander} key={commander} colors={colors} />
+              ))}
+            {!decks.length && (
+              <ListItem>
+                <ListItemText primary="No deck found" />
+              </ListItem>
+            )}
+          </List>
+          <Zoom
+            in
+            timeout={{
+              enter: 200,
+              exit: 200
+            }}
+            unmountOnExit
+          >
+            <Fab className={classes.fab} color="primary" onClick={handleShow("deck")}>
+              <AddIcon />
+            </Fab>
+          </Zoom>
+          <AddDeck onClose={handleShow()} open={show === "deck"} />
         </>
       )}
     </>

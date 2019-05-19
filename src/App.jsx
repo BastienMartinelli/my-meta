@@ -10,6 +10,7 @@ import Store, { Persister } from "./store";
 import Games from "./screens/Games";
 import Playgroup from "./screens/Playgroup";
 import theme from "./utils/theme";
+import Welcome from "./screens/Welcome";
 
 const routes = {
   games: {
@@ -42,6 +43,7 @@ function App() {
         <Persister>
           <CssBaseline />
           <Router routes={routes} defaultRoute={routes.games} />
+          <Welcome />
         </Persister>
       </Store.Provider>
     </MuiThemeProvider>

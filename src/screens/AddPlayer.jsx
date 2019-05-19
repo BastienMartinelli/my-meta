@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -66,22 +65,37 @@ function AddPlayer({ onChange }) {
           <MenuItem value="Guest">
             <em>Guest</em>
           </MenuItem>
-          {!!state.PLAYERS &&
-            state.PLAYERS.map(m => (
+          {!!state.players &&
+            state.players.map(m => (
               <MenuItem key={m.name} value={m.name}>
                 {m.name}
               </MenuItem>
             ))}
         </Select>
       </FormControl>
-      <TextField
-        margin="normal"
-        label="Deck"
-        fullWidth
-        variant="outlined"
-        value={value.deck || ""}
-        onChange={handleChange("deck")}
-      />
+      <div className={classes.divider} />
+      <FormControl variant="outlined" className={classes.formControl} fullWidth>
+        <InputLabel htmlFor="deck">Deck</InputLabel>
+        <Select
+          value={value.deck || ""}
+          onChange={handleChange("deck")}
+          input={<OutlinedInput name="deck" id="deck" labelWidth={50} />}
+          fullWidth
+        >
+          <MenuItem value="">
+            <em />
+          </MenuItem>
+          <MenuItem value="Other">
+            <em>Other</em>
+          </MenuItem>
+          {!!state.decks &&
+            state.decks.map(d => (
+              <MenuItem key={d.commander} value={d.commander}>
+                {d.commander}
+              </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
       <div className={classes.divider}>
         <FormControlLabel
           control={<Switch checked={value.winner || false} onChange={handleCheck} value="winner" />}
