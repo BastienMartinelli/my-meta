@@ -1,17 +1,20 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Restore from "@material-ui/icons/Restore";
-import TrendingUp from "@material-ui/icons/TrendingUp";
-import People from "@material-ui/icons/People";
+import RestoreIcon from "@material-ui/icons/Restore";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import PeopleIcon from "@material-ui/icons/People";
+import SettingsIcon from "@material-ui/icons/Settings";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-import Router from "components/Router";
-import Persister from "components/Persister";
 import Store from "store";
 import Games from "screens/Games/Games";
 import Playgroup from "screens/Playgroup";
-import theme from "utils/theme";
 import Welcome from "screens/Welcome";
+import Stats from "screens/Stats";
+import Settings from "screens/Settings";
+import Router from "components/Router";
+import Persister from "components/Persister";
+import theme from "utils/theme";
 
 const routes = {
   games: {
@@ -19,21 +22,28 @@ const routes = {
     label: "Games",
     long: "Games History",
     Screen: Games,
-    icon: <Restore />
+    icon: <RestoreIcon />
   },
   playgroup: {
     value: "playgroup",
     label: "Playgroup",
     long: "My Playgroup",
     Screen: Playgroup,
-    icon: <People />
+    icon: <PeopleIcon />
   },
   stats: {
     value: "stats",
     label: "Stats",
     long: "Game Statistics",
-    Screen: () => <div>Stats</div>,
-    icon: <TrendingUp />
+    Screen: Stats,
+    icon: <TrendingUpIcon />
+  },
+  settings: {
+    value: "settings",
+    label: "Settings",
+    long: "Application settings",
+    Screen: Settings,
+    icon: <SettingsIcon />
   }
 };
 
