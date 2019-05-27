@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import store from "./store";
+import store from "store";
 
 /**
  * Component that will persist in local storage

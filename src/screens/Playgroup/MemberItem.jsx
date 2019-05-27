@@ -6,10 +6,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 
-import store from "../store";
-import Confirm from "../components/Confirm";
-
-import avatars from "../utils/avatars";
+import store from "store";
+import Confirm from "components/Confirm";
+import avatars from "utils/avatars";
 
 function MemberItem({ name, avatar }) {
   const [, dispatch] = store.useStore();

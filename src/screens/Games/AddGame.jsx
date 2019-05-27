@@ -12,7 +12,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/styles";
 
-import store from "../store";
+import store from "store";
 import AddPlayer from "./AddPlayer";
 
 const useStyles = makeStyles({

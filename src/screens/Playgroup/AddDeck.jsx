@@ -9,19 +9,10 @@ import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import store from "../store";
-import ManaPicker from "../components/ManaPicker";
+import store from "store";
+import ManaPicker from "components/ManaPicker";
 
-const FORMATS = [
-  "commander",
-  "peasant",
-  "pauper",
-  "oathbreaker",
-  "standard",
-  "modern",
-  "name",
-  "brawl"
-];
+import FORMATS from "constants/formats";
 
 function AddDeck({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();

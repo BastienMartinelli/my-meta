@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,21 +10,24 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import store from "../store";
+import store from "store";
 
 function Welcome() {
   const [{ notFirstTime }, dispatch] = store.useStore();
   const [init, setInit] = useState(false);
+
+  // delaying modal opening to show the transition
+  useEffect(() => {
+    setTimeout(() => {
+      setInit(true);
+    }, 1000);
+  }, []);
 
   function handleConfirm() {
     dispatch({
       type: "@APP/FIRST_TIME"
     });
   }
-
-  setTimeout(() => {
-    setInit(true);
-  }, 1000);
 
   return (
     <Dialog open={init && !notFirstTime} TransitionComponent={Grow}>

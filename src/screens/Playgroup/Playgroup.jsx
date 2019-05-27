@@ -12,7 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import store from "../store";
+import store from "store";
 import AddMember from "./AddMember";
 import AddDeck from "./AddDeck";
 import DeckItem from "./DeckItem";
@@ -110,9 +110,7 @@ function Playgroup() {
           >
             <Divider />
             {!!decks &&
-              decks.map(({ name, colors }) => (
-                <DeckItem name={name} key={name} colors={colors} />
-              ))}
+              decks.map(({ name, colors }) => <DeckItem name={name} key={name} colors={colors} />)}
             {!decks.length && (
               <ListItem>
                 <ListItemText primary="No deck found" />

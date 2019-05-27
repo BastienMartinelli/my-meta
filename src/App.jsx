@@ -5,12 +5,13 @@ import TrendingUp from "@material-ui/icons/TrendingUp";
 import People from "@material-ui/icons/People";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-import Router from "./components/Router";
-import Store, { Persister } from "./store";
-import Games from "./screens/Games";
-import Playgroup from "./screens/Playgroup";
-import theme from "./utils/theme";
-import Welcome from "./screens/Welcome";
+import Router from "components/Router";
+import Persister from "components/Persister";
+import Store from "store";
+import Games from "screens/Games/Games";
+import Playgroup from "screens/Playgroup";
+import theme from "utils/theme";
+import Welcome from "screens/Welcome";
 
 const routes = {
   games: {

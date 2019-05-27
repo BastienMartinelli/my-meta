@@ -11,8 +11,8 @@ import { makeStyles } from "@material-ui/styles";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
 
-import store from "../store";
-import avatars from "../utils/avatars";
+import store from "store";
+import avatars from "utils/avatars";
 
 const useStyles = makeStyles({
   flex: {

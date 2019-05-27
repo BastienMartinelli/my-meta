@@ -6,9 +6,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/styles";
 
-import store from "../store";
-import Confirm from "../components/Confirm";
-import Mana from "../components/Mana";
+import store from "store";
+import Confirm from "components/Confirm";
+import Mana from "components/Mana";
 
 const withStyles = makeStyles({
   name: {
@@ -47,10 +47,7 @@ function DeckItem({ name, colors = [] }) {
   return (
     <>
       <ListItem button>
-        <ListItemText
-          primary={<span className={classes.name}>{name}</span>}
-          secondary={text}
-        />
+        <ListItemText primary={<span className={classes.name}>{name}</span>} secondary={text} />
         <ListItemSecondaryAction>
           <IconButton onClick={confirmDelete}>
             <DeleteIcon />

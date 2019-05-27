@@ -9,7 +9,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
-import store from "../store";
+import store from "store";
 
 const useStyles = makeStyles({
   divider: {
