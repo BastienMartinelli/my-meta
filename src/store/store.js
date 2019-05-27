@@ -31,7 +31,7 @@ const reducer = (state, action) => {
     case "@DECKS/DELETE":
       return {
         ...state,
-        decks: state.decks.filter(d => d.commander !== action.payload)
+        decks: state.decks.filter(d => d.name !== action.payload)
       };
     case "@APP/FIRST_TIME":
       return {

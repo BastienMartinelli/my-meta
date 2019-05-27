@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     display: "flex",
     width: "100%",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: 10
   },
   notSelected: {
     margin: 5,
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
     width: 60,
     height: 60,
     margin: 5,
-    border: "2px solid black",
+    border: "3px solid rgba(0,0,0,0.8)",
     boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
   }
 });
@@ -34,7 +35,12 @@ function ManaPicker({ value = [], onChange }) {
 
   const handleChange = c => () => {
     const result = value.includes(c) ? value.filter(e => c !== e) : [...value, c];
-    if (c && onChange) onChange(result);
+    if (c && onChange)
+      onChange({
+        target: {
+          value: result
+        }
+      });
   };
 
   return (
@@ -43,7 +49,7 @@ function ManaPicker({ value = [], onChange }) {
         const selected = value.includes(c) ? classes.selected : classes.notSelected;
 
         return (
-          <Avatar className={selected} onClick={handleChange(c)}>
+          <Avatar key={c} className={selected} onClick={handleChange(c)}>
             <Mana color={c} />
           </Avatar>
         );

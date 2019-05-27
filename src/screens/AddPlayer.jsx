@@ -90,8 +90,8 @@ function AddPlayer({ onChange }) {
           </MenuItem>
           {!!state.decks &&
             state.decks.map(d => (
-              <MenuItem key={d.commander} value={d.commander}>
-                {d.commander}
+              <MenuItem key={d.name} value={d.name}>
+                {d.name}
               </MenuItem>
             ))}
         </Select>

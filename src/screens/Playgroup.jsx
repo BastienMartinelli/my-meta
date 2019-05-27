@@ -110,8 +110,8 @@ function Playgroup() {
           >
             <Divider />
             {!!decks &&
-              decks.map(({ commander, colors }) => (
-                <DeckItem commander={commander} key={commander} colors={colors} />
+              decks.map(({ name, colors }) => (
+                <DeckItem name={name} key={name} colors={colors} />
               ))}
             {!decks.length && (
               <ListItem>

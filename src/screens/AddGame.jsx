@@ -17,7 +17,8 @@ import AddPlayer from "./AddPlayer";
 
 const useStyles = makeStyles({
   chip: {
-    marginLeft: 3
+    marginLeft: 3,
+    marginTop: 3
   }
 });
 

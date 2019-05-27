@@ -7,29 +7,44 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import store from "../store";
 import ManaPicker from "../components/ManaPicker";
 
+const FORMATS = [
+  "commander",
+  "peasant",
+  "pauper",
+  "oathbreaker",
+  "standard",
+  "modern",
+  "name",
+  "brawl"
+];
+
 function AddDeck({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();
-  const [commander, setCommander] = React.useState("");
-  const [colors, setColors] = React.useState([]);
+  const [form, setForm] = React.useState({});
 
-  function handleChange(e) {
-    setCommander(e.target.value || "");
-  }
+  const handleChange = field => e => {
+    setForm({
+      ...form,
+      [field]: e.target.value || ""
+    });
+  };
 
   function onSubmit() {
-    if (commander) {
-      dispatch({
-        type: "@DECKS/ADD",
-        payload: { commander, colors }
-      });
-      onClose();
-      setCommander("");
-      setColors([]);
-    }
+    const { name, format, colors } = form;
+
+    if (!name || !format || !colors || !colors.length) return;
+
+    dispatch({
+      type: "@DECKS/ADD",
+      payload: { name, colors, format }
+    });
+    onClose();
+    setForm({});
   }
 
   return (
@@ -40,18 +55,34 @@ function AddDeck({ onClose, open, fullScreen }) {
       aria-labelledby="form-dialog-title"
       TransitionComponent={Grow}
     >
-      <DialogTitle id="form-dialog-title">New Deck</DialogTitle>
+      <DialogTitle>New Deck</DialogTitle>
       <DialogContent>
         <TextField
           margin="normal"
-          id="commander"
-          label="Commander"
+          id="name"
+          label="Deck name"
           fullWidth
           variant="outlined"
-          value={commander || ""}
-          onChange={handleChange}
+          value={form.name || ""}
+          onChange={handleChange("name")}
         />
-        <ManaPicker onChange={setColors} value={colors} />
+        <TextField
+          id="format"
+          select
+          label="Format"
+          value={form.format || ""}
+          onChange={handleChange("format")}
+          margin="normal"
+          variant="outlined"
+          fullWidth
+        >
+          {FORMATS.map(format => (
+            <MenuItem key={format} value={format}>
+              {format}
+            </MenuItem>
+          ))}
+        </TextField>
+        <ManaPicker onChange={handleChange("colors")} value={form.colors} />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="default">

@@ -16,7 +16,7 @@ const withStyles = makeStyles({
   }
 });
 
-function DeckItem({ commander, colors = [] }) {
+function DeckItem({ name, colors = [] }) {
   const [, dispatch] = store.useStore();
   const [show, setShow] = React.useState(false);
   const classes = withStyles();
@@ -28,7 +28,7 @@ function DeckItem({ commander, colors = [] }) {
   function handleDelete() {
     dispatch({
       type: "@DECKS/DELETE",
-      payload: commander
+      payload: name
     });
   }
 
@@ -39,7 +39,7 @@ function DeckItem({ commander, colors = [] }) {
   const text = (
     <span>
       {colors.map(c => (
-        <Mana color={c} />
+        <Mana key={c} color={c} />
       ))}
     </span>
   );
@@ -48,7 +48,7 @@ function DeckItem({ commander, colors = [] }) {
     <>
       <ListItem button>
         <ListItemText
-          primary={<span className={classes.name}>{commander}</span>}
+          primary={<span className={classes.name}>{name}</span>}
           secondary={text}
         />
         <ListItemSecondaryAction>
@@ -60,7 +60,7 @@ function DeckItem({ commander, colors = [] }) {
       <Confirm
         open={show}
         title="Deck deletion"
-        text={`Do you realy want to delete ${commander} ?`}
+        text={`Do you realy want to delete ${name} ?`}
         onConfirm={handleDelete}
         onClose={cancelDelete}
       />
