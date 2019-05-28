@@ -58,6 +58,8 @@ function AddGame({ onClose, open, fullScreen }) {
 
   return (
     <Dialog
+      fullWidth
+      maxWidth="sm"
       fullScreen={fullScreen}
       open={open}
       onClose={onClose}

@@ -26,8 +26,10 @@ const reducer = (state, { type, payload }) => {
      * Initial the store with the given value
      */
     case "@STORE/INIT":
+      const newState = payload || initial;
+
       return {
-        ...payload
+        ...newState
       };
 
     /**

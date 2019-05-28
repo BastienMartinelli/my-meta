@@ -14,7 +14,7 @@ function Confirm({ onClose, open, onConfirm, text, title }) {
   }
 
   return (
-    <Dialog open={open} onClose={onClose} TransitionComponent={Grow}>
+    <Dialog maxWidth="sm" open={open} onClose={onClose} TransitionComponent={Grow}>
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{text}</DialogContentText>

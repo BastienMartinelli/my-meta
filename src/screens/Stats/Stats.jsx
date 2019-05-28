@@ -1,6 +1,7 @@
 import React from "react";
+import Container from "@material-ui/core/Container";
 
 function Stats() {
-  return <div>stats</div>;
+  return <Container maxWidth="md">stats</Container>;
 }
 export default Stats;

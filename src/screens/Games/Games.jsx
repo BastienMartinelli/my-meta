@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Zoom from "@material-ui/core/Zoom";
+import Container from "@material-ui/core/Container";
 
 import store from "store";
 import AddGame from "./AddGame";
@@ -44,7 +45,7 @@ function Games() {
   }
 
   return (
-    <>
+    <Container maxWidth="md">
       {games && !!games.length ? (
         games.map(({ date, players, decks }) => (
           <Card className={classes.card} key={date}>
@@ -84,7 +85,7 @@ function Games() {
         </Fab>
       </Zoom>
       <AddGame onClose={handleClose} open={show} />
-    </>
+    </Container>
   );
 }
 

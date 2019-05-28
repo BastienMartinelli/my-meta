@@ -11,6 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Container from "@material-ui/core/Container";
 
 import store from "store";
 import AddMember from "./AddMember";
@@ -49,7 +50,7 @@ function Playgroup() {
   }
 
   return (
-    <>
+    <Container maxWidth="md">
       <Tabs
         value={tab}
         onChange={handleTabChange}
@@ -132,7 +133,7 @@ function Playgroup() {
           <AddDeck onClose={handleShow()} open={show === "deck"} />
         </>
       )}
-    </>
+    </Container>
   );
 }
 

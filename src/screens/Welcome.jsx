@@ -30,7 +30,7 @@ function Welcome() {
   }
 
   return (
-    <Dialog open={init && !notFirstTime} TransitionComponent={Grow}>
+    <Dialog fullWidth maxWidth="sm" open={init && !notFirstTime} TransitionComponent={Grow}>
       <DialogTitle id="form-dialog-title">Welcome !</DialogTitle>
       <DialogContent>
         <DialogContentText>Where to start from here ?</DialogContentText>
