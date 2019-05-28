@@ -49,15 +49,19 @@ const routes = {
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <Store.Provider>
-        <Persister>
-          <CssBaseline />
-          <Router routes={routes} defaultRoute={routes.games} />
-          <Welcome />
-        </Persister>
-      </Store.Provider>
-    </MuiThemeProvider>
+    <Store.Provider>
+      <Store.Consumer>
+        {([state]) => (
+          <MuiThemeProvider theme={state.dark ? theme.dark : theme.light}>
+            <Persister>
+              <CssBaseline />
+              <Router routes={routes} defaultRoute={routes.games} />
+              <Welcome />
+            </Persister>
+          </MuiThemeProvider>
+        )}
+      </Store.Consumer>
+    </Store.Provider>
   );
 }
 

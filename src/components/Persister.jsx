@@ -21,7 +21,7 @@ function Persister({ children }) {
 
     if (data) {
       dispatch({
-        type: "@STORE/INIT",
+        type: "@APP/INIT",
         payload: data
       });
     }

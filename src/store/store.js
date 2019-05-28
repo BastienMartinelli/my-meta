@@ -17,7 +17,11 @@ const initial = {
   /**
    * Is it the first time app load
    */
-  notFirstTime: false
+  notFirstTime: false,
+  /**
+   * theme
+   */
+  dark: false
 };
 
 const reducer = (state, { type, payload }) => {
@@ -25,11 +29,21 @@ const reducer = (state, { type, payload }) => {
     /**
      * Initial the store with the given value
      */
-    case "@STORE/INIT":
+    case "@APP/INIT":
       const newState = payload || initial;
 
       return {
         ...newState
+      };
+
+    /**
+     * Initial the store with the given value
+     */
+    case "@APP/TOGGLE_DARK":
+      console.log(state.dark);
+      return {
+        ...state,
+        dark: !state.dark
       };
 
     /**
