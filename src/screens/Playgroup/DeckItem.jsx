@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import store from "store";
 import Confirm from "components/Confirm";
-import Mana from "components/Mana";
+import ManaList from "components/ManaList";
 
 const withStyles = makeStyles({
   name: {
@@ -36,13 +36,7 @@ function DeckItem({ name, colors = [] }) {
     setShow(false);
   }
 
-  const text = (
-    <span>
-      {colors.map(c => (
-        <Mana key={c} color={c} />
-      ))}
-    </span>
-  );
+  const text = <ManaList colors={colors} />;
 
   return (
     <>

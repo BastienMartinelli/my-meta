@@ -2,37 +2,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
-  r: {
-    margin: 3,
-    color: "#AF1D1D"
-  },
-  w: {
-    margin: 3,
-    color: "#FFFFFF"
-  },
-  u: {
-    margin: 3,
-    color: "#378BC6"
-  },
-  g: {
-    margin: 3,
-    color: "#5BD387"
-  },
-  b: {
-    margin: 3,
-    color: "#07190B"
-  },
-  x: {
-    margin: 3,
-    color: "#EFEFEF"
+  mana: {
+    margin: 1,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
   }
 });
 
 function Mana({ color }) {
   const classes = useStyles();
-  const icon = ` ms ms-${color}`;
+  const icon = ` ms ms-${color} ms-cost`;
 
-  return <i className={classes[color] + icon} />;
+  return <i className={classes.mana + icon} />;
 }
 
 export default Mana;

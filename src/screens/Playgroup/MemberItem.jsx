@@ -5,6 +5,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 import store from "store";
 import Confirm from "components/Confirm";
@@ -32,7 +33,9 @@ function MemberItem({ name, avatar }) {
   return (
     <>
       <ListItem key={name} button>
-        <Avatar src={avatars[avatar]} />
+        <ListItemAvatar>
+          <Avatar src={avatars[avatar]} />
+        </ListItemAvatar>
         <ListItemText primary={name} />
         <ListItemSecondaryAction>
           <IconButton onClick={confirmDelete}>
