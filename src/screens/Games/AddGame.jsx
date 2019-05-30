@@ -74,6 +74,7 @@ function AddGame({ onClose, open, fullScreen }) {
           {!!form.players &&
             form.players.map((p, i) => (
               <Chip
+                key={i}
                 className={classes.chip}
                 label={`${p.winner ? "🏆 " : ""}${p.player}`}
                 onDelete={deletePlayer(p)}

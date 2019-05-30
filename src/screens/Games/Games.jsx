@@ -15,7 +15,7 @@ import AddGame from "./AddGame";
 
 const useStyles = makeStyles(() => ({
   card: {
-    margin: 20
+    marginTop: 20
   },
   fab: {
     position: "fixed",
@@ -47,8 +47,8 @@ function Games() {
   return (
     <Container maxWidth="md">
       {games && !!games.length ? (
-        games.map(({ date, players, decks }) => (
-          <Card className={classes.card} key={date}>
+        games.map(({ date, players, decks, id }) => (
+          <Card className={classes.card} key={id}>
             <CardContent>
               <Typography variant="h5" component="h2">
                 {winner(players)}

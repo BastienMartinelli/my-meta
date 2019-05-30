@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import Mana from "./Mana";
 
-const COLORS = ["r", "b", "g", "u", "w", "x"];
+const COLORS = ["w", "u", "b", "r", "g", "x"];
 
 const useStyles = makeStyles({
   checked: {},

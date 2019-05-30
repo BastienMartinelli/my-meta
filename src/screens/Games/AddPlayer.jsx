@@ -67,7 +67,7 @@ function AddPlayer({ onChange }) {
           </MenuItem>
           {!!state.players &&
             state.players.map(m => (
-              <MenuItem key={m.name} value={m.name}>
+              <MenuItem key={m.id} value={m.name}>
                 {m.name}
               </MenuItem>
             ))}
@@ -90,7 +90,7 @@ function AddPlayer({ onChange }) {
           </MenuItem>
           {!!state.decks &&
             state.decks.map(d => (
-              <MenuItem key={d.name} value={d.name}>
+              <MenuItem key={d.id} value={d.name}>
                 {d.name}
               </MenuItem>
             ))}

@@ -1,5 +1,6 @@
 import createStore from "./createStore";
 import shortid from "shortid";
+import dayjs from "dayjs";
 
 const initial = {
   /**
@@ -105,12 +106,12 @@ const reducer = (state, { type, payload }) => {
      * Add a new game to the game history list
      */
     case "@GAMES/ADD":
-      const today = new Date();
+      const date = dayjs().format("YYYY/MM/DD");
 
       const newGame = {
         ...payload,
         id: shortid.generate(),
-        date: today.toString()
+        date
       };
 
       return {
