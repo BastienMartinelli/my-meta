@@ -7,16 +7,16 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
-import MenuItem from "@material-ui/core/MenuItem";
 
 import store from "store";
 import ManaPicker from "components/ManaPicker";
-
-import FORMATS from "constants/formats";
+import CommanderInput from "./CommanderInput";
 
 function AddDeck({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();
-  const [form, setForm] = React.useState({});
+  const [form, setForm] = React.useState({
+    format: "commander"
+  });
 
   const handleChange = field => e => {
     setForm({
@@ -24,6 +24,15 @@ function AddDeck({ onClose, open, fullScreen }) {
       [field]: e.target.value || ""
     });
   };
+
+  function handleCommanderSelect({ name, colors, imageUrl }) {
+    setForm({
+      ...form,
+      colors,
+      imageUrl,
+      commander: name
+    });
+  }
 
   function onSubmit() {
     const { name, format, colors } = form;
@@ -59,7 +68,7 @@ function AddDeck({ onClose, open, fullScreen }) {
           value={form.name || ""}
           onChange={handleChange("name")}
         />
-        <TextField
+        {/* <TextField
           id="format"
           select
           label="Format"
@@ -68,13 +77,21 @@ function AddDeck({ onClose, open, fullScreen }) {
           margin="normal"
           variant="outlined"
           fullWidth
-        >
+        > 
           {FORMATS.map(format => (
             <MenuItem key={format} value={format}>
               {format}
             </MenuItem>
           ))}
         </TextField>
+        */}
+        {form.format === "commander" && (
+          <CommanderInput
+            value={form.commander}
+            onChange={handleChange("commander")}
+            onSelect={handleCommanderSelect}
+          />
+        )}
         <ManaPicker onChange={handleChange("colors")} value={form.colors} />
       </DialogContent>
       <DialogActions>

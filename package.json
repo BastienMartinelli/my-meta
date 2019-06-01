@@ -7,10 +7,12 @@
     "@material-ui/icons": "^4.0.1",
     "@material-ui/styles": "^4.0.1",
     "dayjs": "^1.8.14",
+    "mtgsdk": "^0.4.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "react-use": "^9.1.2",
     "shortid": "^2.2.14"
   },
   "scripts": {
