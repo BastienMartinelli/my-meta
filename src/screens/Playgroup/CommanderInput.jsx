@@ -3,17 +3,22 @@ import TextField from "@material-ui/core/TextField";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import mtg from "mtgsdk";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { makeStyles } from "@material-ui/styles/";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
+import { getCommanderByName } from "store/actions";
+import ManaList from "components/ManaList";
+
 const useStyles = makeStyles({
   menu: {
     marginTop: 60,
     width: "100%"
+  },
+  mana: {
+    marginRight: 10
   }
 });
 
@@ -30,17 +35,7 @@ function AddDeck({ onChange, onSelect, value }) {
     try {
       setLoading(true);
       // querying mtg web service
-      const cards = await mtg.card.where({
-        supertypes: "legendary",
-        name: value
-      });
-
-      // filtering cards duplicates
-      const results = [...new Set(cards.map(c => c.name))].map(name =>
-        cards.find(c => c.name === name)
-      );
-
-      setResults(results);
+      setResults(await getCommanderByName(value));
     } catch (err) {
       console.log(err);
       setResults(null);
@@ -63,7 +58,7 @@ function AddDeck({ onChange, onSelect, value }) {
     const returnedValue = {
       name: card.name,
       imageUrl: card.imageUrl,
-      colors: card.colorIdentity.map(c => c.toLowerCase())
+      colors: card.colorIdentity
     };
 
     // notify selection
@@ -74,7 +69,6 @@ function AddDeck({ onChange, onSelect, value }) {
    * handle menu close
    */
   const handleClose = () => {
-    console.log("coucou");
     setResults(null);
   };
 
@@ -113,7 +107,8 @@ function AddDeck({ onChange, onSelect, value }) {
         {results &&
           results.map(card => (
             <MenuItem key={card.name} onClick={handleCommanderClick(card)}>
-              {card.name}
+              <ManaList colors={card.colorIdentity} className={classes.mana} />
+              <span>{card.name}</span>
             </MenuItem>
           ))}
       </Menu>

@@ -34,7 +34,7 @@ function MemberItem({ name, avatar }) {
     <>
       <ListItem key={name} button>
         <ListItemAvatar>
-          <Avatar src={avatars[avatar]} />
+          <Avatar src={avatars[avatar]}>{!avatar && !!name && name[0]}</Avatar>
         </ListItemAvatar>
         <ListItemText primary={name} />
         <ListItemSecondaryAction>

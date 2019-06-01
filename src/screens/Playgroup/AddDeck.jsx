@@ -30,14 +30,15 @@ function AddDeck({ onClose, open, fullScreen }) {
       ...form,
       colors,
       imageUrl,
-      commander: name
+      commander: name,
+      name: form.name || name
     });
   }
 
   function onSubmit() {
     const { name, format, colors } = form;
 
-    if (!name || !format || !colors || !colors.length) return;
+    if (!name || !format) return;
 
     dispatch({
       type: "@DECKS/ADD",

@@ -48,7 +48,9 @@ function Members({ players }) {
       >
         <Divider />
         {players &&
-          players.map(({ name, avatar }) => <MemberItem name={name} key={name} avatar={avatar} />)}
+          players.map(({ name, avatar, id }) => (
+            <MemberItem name={name} key={id} avatar={avatar} />
+          ))}
         {!players.length && (
           <ListItem>
             <ListItemText primary="No player found" />

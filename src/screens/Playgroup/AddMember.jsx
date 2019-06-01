@@ -5,7 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/styles";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
@@ -19,7 +18,8 @@ const useStyles = makeStyles({
     display: "flex",
     width: "100%",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: 20
   },
   notSelected: {
     margin: 5,
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 function AddMember({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();
   const [name, setName] = React.useState("");
-  const [av, setAv] = React.useState(0);
+  const [av, setAv] = React.useState(null);
 
   const classes = useStyles();
 
@@ -73,7 +73,6 @@ function AddMember({ onClose, open, fullScreen }) {
     >
       <DialogTitle id="form-dialog-title">New member</DialogTitle>
       <DialogContent>
-        <DialogContentText>Name of that fucker ?</DialogContentText>
         <TextField
           margin="normal"
           id="name"
@@ -84,6 +83,12 @@ function AddMember({ onClose, open, fullScreen }) {
           onChange={handleChange}
         />
         <div className={classes.flex}>
+          <Avatar
+            className={av === null ? classes.selected : classes.notSelected}
+            onClick={handleSelect(null)}
+          >
+            {!!name && name[0]}
+          </Avatar>
           {avatars.map((a, i) => (
             <Avatar
               key={i}

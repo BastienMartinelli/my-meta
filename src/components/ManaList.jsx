@@ -10,7 +10,7 @@ function ManaList({ colors, className }) {
       {colors.includes("b") && <Mana color="b" />}
       {colors.includes("r") && <Mana color="r" />}
       {colors.includes("g") && <Mana color="g" />}
-      {colors.includes("x") && <Mana color="x" />}
+      {!colors.length && <Mana color="x" />}
     </span>
   );
 }
