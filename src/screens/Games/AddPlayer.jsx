@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/styles/";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
+import IconButton from "@material-ui/core/IconButton";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import AddIcon from "@material-ui/icons/Add";
 
 import store from "store";
 
@@ -18,6 +15,9 @@ const useStyles = makeStyles({
   },
   formControl: {
     marginTop: 5
+  },
+  button: {
+    marginTop: 12
   }
 });
 
@@ -40,72 +40,58 @@ function AddPlayer({ onChange }) {
     setValue({});
   }
 
-  function handleCheck(e) {
-    if (e) {
-      setValue({
-        ...value,
-        winner: e.target.checked
-      });
-    }
-  }
-
   return (
-    <>
-      <FormControl variant="outlined" className={classes.formControl} fullWidth>
-        <InputLabel htmlFor="player">Player</InputLabel>
-        <Select
+    <Grid container spacing={1}>
+      <Grid item xs={5}>
+        <TextField
+          select
+          label="Player name"
+          className={classes.textField}
           value={value.player || ""}
           onChange={handleChange("player")}
-          input={<OutlinedInput name="player" id="player" labelWidth={50} />}
+          margin="normal"
+          variant="outlined"
           fullWidth
         >
           <MenuItem value="">
             <em />
-          </MenuItem>
-          <MenuItem value="Guest">
-            <em>Guest</em>
           </MenuItem>
           {!!state.players &&
-            state.players.map(m => (
-              <MenuItem key={m.id} value={m.name}>
-                {m.name}
+            state.players.map(option => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.name}
               </MenuItem>
             ))}
-        </Select>
-      </FormControl>
-      <div className={classes.divider} />
-      <FormControl variant="outlined" className={classes.formControl} fullWidth>
-        <InputLabel htmlFor="deck">Deck</InputLabel>
-        <Select
+        </TextField>
+      </Grid>
+      <Grid item xs={5}>
+        <TextField
+          select
+          label="Deck name"
+          className={classes.textField}
           value={value.deck || ""}
           onChange={handleChange("deck")}
-          input={<OutlinedInput name="deck" id="deck" labelWidth={50} />}
+          margin="normal"
+          variant="outlined"
           fullWidth
         >
           <MenuItem value="">
             <em />
           </MenuItem>
-          <MenuItem value="Other">
-            <em>Other</em>
-          </MenuItem>
           {!!state.decks &&
-            state.decks.map(d => (
-              <MenuItem key={d.id} value={d.name}>
-                {d.name}
+            state.decks.map(option => (
+              <MenuItem key={option.id} value={option.id}>
+                {option.name}
               </MenuItem>
             ))}
-        </Select>
-      </FormControl>
-      <div className={classes.divider}>
-        <FormControlLabel
-          control={<Switch checked={value.winner || false} onChange={handleCheck} value="winner" />}
-          label="Winner"
-        />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Add player
-        </Button>
-      </div>
-    </>
+        </TextField>
+      </Grid>
+      <Grid item xs={2}>
+        <IconButton className={classes.button} onClick={handleSubmit}>
+          <AddIcon fontSize="large" />
+        </IconButton>
+      </Grid>
+    </Grid>
   );
 }
 
