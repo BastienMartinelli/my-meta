@@ -7,7 +7,7 @@ const FORMATS = [
   "modern",
   "legacy",
   "brawl",
-  "none"
+  "other"
 ];
 
 export default FORMATS;

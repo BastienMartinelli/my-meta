@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
@@ -7,16 +7,25 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
 import Grow from "@material-ui/core/Grow";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import store from "store";
 import ManaPicker from "components/ManaPicker";
 import CommanderInput from "./CommanderInput";
+import FORMATS from "constants/formats";
 
 function AddDeck({ onClose, open, fullScreen }) {
-  const [, dispatch] = store.useStore();
-  const [form, setForm] = React.useState({
-    format: "commander"
-  });
+  const [state, dispatch] = store.useStore();
+  const [form, setForm] = useState({});
+
+  // initialize component's state with favorites
+  useEffect(() => {
+    setForm({
+      ...form,
+      format: FORMATS[state.favoriteFormat]
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const handleChange = field => e => {
     setForm({
@@ -69,7 +78,7 @@ function AddDeck({ onClose, open, fullScreen }) {
           value={form.name || ""}
           onChange={handleChange("name")}
         />
-        {/* <TextField
+        <TextField
           id="format"
           select
           label="Format"
@@ -78,14 +87,13 @@ function AddDeck({ onClose, open, fullScreen }) {
           margin="normal"
           variant="outlined"
           fullWidth
-        > 
+        >
           {FORMATS.map(format => (
             <MenuItem key={format} value={format}>
               {format}
             </MenuItem>
           ))}
         </TextField>
-        */}
         {form.format === "commander" && (
           <CommanderInput
             value={form.commander}

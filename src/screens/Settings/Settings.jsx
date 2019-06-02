@@ -10,9 +10,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import InvertColorsIcon from "@material-ui/icons/InvertColors";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import Divider from "@material-ui/core/Divider";
 
 import store from "store";
 import Confirm from "components/Confirm";
+import FORMATS from "constants/formats";
 
 const useStyles = makeStyles({
   button: {
@@ -20,12 +25,17 @@ const useStyles = makeStyles({
   },
   container: {
     marginTop: 10
+  },
+  divider: {
+    marginTop: 20,
+    marginBottom: 20
   }
 });
 
 function Settings() {
   const [state, dispatch] = store.useStore();
   const [showConfirm, setConfirm] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
 
   function toggleConfirm() {
@@ -43,6 +53,22 @@ function Settings() {
     dispatch({
       type: "@APP/TOGGLE_DARK"
     });
+  }
+
+  function handleClickListItem(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleMenuItemClick(event, index) {
+    dispatch({
+      type: "@APP/SET_FAVORITE_FORMAT",
+      payload: index
+    });
+    setAnchorEl(null);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
   }
 
   return (
@@ -67,6 +93,26 @@ function Settings() {
             </ListItemSecondaryAction>
           </ListItem>
         </List>
+        <List subheader={<ListSubheader>Favorites</ListSubheader>}>
+          <ListItem button onClick={handleClickListItem}>
+            <ListItemIcon>
+              <FavoriteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Favorite format" secondary={FORMATS[state.favoriteFormat]} />
+          </ListItem>
+        </List>
+        <Menu id="lock-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+          {FORMATS.map((option, index) => (
+            <MenuItem
+              key={option}
+              selected={index === state.favoriteFormat}
+              onClick={event => handleMenuItemClick(event, index)}
+            >
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
+        <Divider className={classes.divider} />
         <List subheader={<ListSubheader>App data</ListSubheader>}>
           <ListItem button onClick={toggleConfirm}>
             <ListItemIcon>

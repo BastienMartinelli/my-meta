@@ -22,7 +22,11 @@ const initial = {
   /**
    * theme
    */
-  dark: false
+  dark: false,
+  /**
+   * favorite format
+   */
+  favoriteFormat: 0
 };
 
 const reducer = (state, { type, payload }) => {
@@ -41,10 +45,18 @@ const reducer = (state, { type, payload }) => {
      * Initial the store with the given value
      */
     case "@APP/TOGGLE_DARK":
-      console.log(state.dark);
       return {
         ...state,
         dark: !state.dark
+      };
+
+    /**
+     * Initial the store with the given value
+     */
+    case "@APP/SET_FAVORITE_FORMAT":
+      return {
+        ...state,
+        favoriteFormat: payload
       };
 
     /**
