@@ -88,6 +88,7 @@ const reducer = (state, { type, payload }) => {
     case "@DECKS/ADD":
       const newDeck = {
         ...payload,
+        colors: payload.colors || [],
         id: shortid.generate()
       };
 
@@ -119,10 +120,12 @@ const reducer = (state, { type, payload }) => {
      */
     case "@GAMES/ADD":
       const date = dayjs().format("YYYY/MM/DD");
+      const number = state.games.length + 1;
 
       const newGame = {
         ...payload,
         id: shortid.generate(),
+        number,
         date
       };
 
@@ -135,5 +138,12 @@ const reducer = (state, { type, payload }) => {
       return state;
   }
 };
+
+/* get the player from the store */
+export const getDeckById = state => deckId => !!deckId && state.decks.find(d => d.id === deckId);
+
+/* get the deck from the store */
+export const getPlayerById = state => playerId =>
+  !!playerId && state.players.find(p => p.id === playerId);
 
 export default createStore(reducer, initial);

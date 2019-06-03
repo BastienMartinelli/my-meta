@@ -2,7 +2,7 @@ import React from "react";
 
 import Mana from "./Mana";
 
-function ManaList({ colors, className }) {
+function ManaList({ colors = [], className }) {
   return (
     <span className={className}>
       {colors.includes("w") && <Mana color="w" />}

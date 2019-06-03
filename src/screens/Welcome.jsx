@@ -16,8 +16,8 @@ function Welcome() {
   const [{ notFirstTime }, dispatch] = store.useStore();
   const [init, setInit] = useState(false);
 
-  // delaying modal opening to show the transition
   useEffect(() => {
+    // delaying modal opening to show the transition
     setTimeout(() => {
       setInit(true);
     }, 1000);

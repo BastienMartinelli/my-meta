@@ -6,51 +6,78 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Star from "@material-ui/icons/Star";
-import StarBorder from "@material-ui/icons/StarBorder";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/styles/makeStyles";
+import { darken } from "@material-ui/core/styles/colorManipulator";
 
 import store from "store";
+import { getDeckById, getPlayerById } from "store/store";
 import avatars from "utils/avatars";
+import ManaList from "components/ManaList";
+
+const WIN_COLOR = "#FFD951";
+
+const useStyles = makeStyles({
+  winner: {
+    backgroundColor: WIN_COLOR,
+    color: "#FFF",
+    "&:hover": {
+      backgroundColor: darken(WIN_COLOR, 0.3)
+    }
+  },
+  playerName: {
+    marginLeft: 5
+  }
+});
 
 function PlayerItem({ playerData, onDelete, onWin }) {
-  const { playerId, deckId } = playerData;
+  const { playerId, deckId, winner } = playerData;
   const [state] = store.useStore();
+  const classes = useStyles();
 
   /**
    * delete the player from the list
    */
   function handleDelete() {
-    onDelete(playerId);
+    if (onDelete) onDelete(playerId);
   }
 
   /**
    * Toggle the win state of the player
    */
   function handleWin() {
-    onWin(playerId);
+    if (onWin) onWin(playerId);
   }
 
   /* get the player from the store */
-  const deck = !!deckId && state.decks.find(d => d.id === deckId);
+  const deck = getDeckById(state)(deckId);
 
   /* get the deck from the store */
-  const player = !!playerId && state.players.find(p => p.id === playerId);
+  const player = getPlayerById(state)(playerId);
+
+  const deckInfo = (
+    <>
+      <ManaList colors={deck.colors} />
+      <Typography component="span" variant="subtitle2" className={classes.playerName}>
+        {deck.name}
+      </Typography>
+    </>
+  );
 
   return (
-    <ListItem>
+    <ListItem className={winner ? classes.winner : ""} button={!!onWin} onClick={handleWin}>
       <ListItemAvatar>
         <Avatar src={player.avatar !== undefined && avatars[player.avatar]}>
           {!!player.name && player.name[0]}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={player.name} secondary={deck.name} />
+      <ListItemText primary={player.name} secondary={deckInfo} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="Delete" onClick={handleDelete}>
-          <DeleteIcon />
-        </IconButton>
-        <IconButton edge="end" aria-label="Winner" onClick={handleWin}>
-          {playerData.winner ? <Star /> : <StarBorder />}
-        </IconButton>
+        {!!onDelete && (
+          <IconButton edge="end" aria-label="Delete" onClick={handleDelete}>
+            <DeleteIcon />
+          </IconButton>
+        )}
       </ListItemSecondaryAction>
     </ListItem>
   );

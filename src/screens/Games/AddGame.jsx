@@ -31,8 +31,6 @@ function AddGame({ onClose, open, fullScreen }) {
     }
   }
 
-  console.log(form.players);
-
   /**
    * Add the given player to the list
    * @param {Object} player the player to add
@@ -74,7 +72,7 @@ function AddGame({ onClose, open, fullScreen }) {
 
     setForm({
       ...form,
-      player: [...otherPlayers, player]
+      players: [...otherPlayers, player]
     });
   }
 
@@ -111,4 +109,4 @@ function AddGame({ onClose, open, fullScreen }) {
   );
 }
 
-export default withMobileDialog()(AddGame);
+export default withMobileDialog()(React.memo(AddGame));

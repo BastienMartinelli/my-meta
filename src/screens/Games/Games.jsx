@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 
 import store from "store";
 import AddGame from "./AddGame";
+import Game from "./Game";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -24,12 +25,6 @@ const useStyles = makeStyles(() => ({
     margin: 10
   }
 }));
-
-function getWinners(players) {
-  const winners = !!players && players.filter(p => p.winner).map(p => p.player);
-
-  return !!winners && !!winners.length ? `🏆 ${winners.join(" / ")}` : "😐 No winner this time";
-}
 
 function Games() {
   const [{ games }] = store.useStore();
@@ -47,19 +42,9 @@ function Games() {
   return (
     <Container maxWidth="md">
       {games && !!games.length ? (
-        games.map(({ date, players, decks, id }) => (
-          <Card className={classes.card} key={id}>
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                {getWinners(players)}
-              </Typography>
-              <Typography color="textSecondary">{date}</Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Detail</Button>
-            </CardActions>
-          </Card>
-        ))
+        games
+          .sort((a, b) => b.number - a.number)
+          .map((game, index) => <Game key={game.id} {...game} />)
       ) : (
         <Card className={classes.card}>
           <CardContent>
