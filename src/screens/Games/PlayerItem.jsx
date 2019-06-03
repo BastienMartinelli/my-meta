@@ -13,30 +13,37 @@ import store from "store";
 import avatars from "utils/avatars";
 
 function PlayerItem({ playerData, onDelete, onWin }) {
+  const { playerId, deckId } = playerData;
   const [state] = store.useStore();
 
+  /**
+   * delete the player from the list
+   */
   function handleDelete() {
-    onDelete(playerData.player);
+    onDelete(playerId);
   }
 
+  /**
+   * Toggle the win state of the player
+   */
   function handleWin() {
-    onWin(playerData.player);
+    onWin(playerId);
   }
 
-  const { player, deck } = playerData;
+  /* get the player from the store */
+  const deck = !!deckId && state.decks.find(d => d.id === deckId);
 
-  const fullDeck = deck !== "Other" ? state.decks.find(d => d.id === deck) : { name: deck };
-  const fullPlayer =
-    player !== "Guest" ? state.players.find(p => p.id === player) : { name: player };
+  /* get the deck from the store */
+  const player = !!playerId && state.players.find(p => p.id === playerId);
 
   return (
     <ListItem>
       <ListItemAvatar>
-        <Avatar src={fullPlayer.avatar !== undefined && avatars[fullPlayer.avatar]}>
-          {!!fullPlayer.name && fullPlayer.name[0]}
+        <Avatar src={player.avatar !== undefined && avatars[player.avatar]}>
+          {!!player.name && player.name[0]}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={fullPlayer.name} secondary={fullDeck.name} />
+      <ListItemText primary={player.name} secondary={deck.name} />
       <ListItemSecondaryAction>
         <IconButton edge="end" aria-label="Delete" onClick={handleDelete}>
           <DeleteIcon />

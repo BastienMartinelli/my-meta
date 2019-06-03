@@ -36,7 +36,7 @@ function AddPlayer({ onChange }) {
   };
 
   function handleSubmit() {
-    if (onChange && value && value.player && value.deck) return onChange(value);
+    if (onChange && value && value.playerId && value.deckId) return onChange(value);
     setValue({});
   }
 
@@ -47,8 +47,8 @@ function AddPlayer({ onChange }) {
           select
           label="Player name"
           className={classes.textField}
-          value={value.player || ""}
-          onChange={handleChange("player")}
+          value={value.playerId || ""}
+          onChange={handleChange("playerId")}
           margin="normal"
           variant="outlined"
           fullWidth
@@ -69,8 +69,8 @@ function AddPlayer({ onChange }) {
           select
           label="Deck name"
           className={classes.textField}
-          value={value.deck || ""}
-          onChange={handleChange("deck")}
+          value={value.deckId || ""}
+          onChange={handleChange("deckId")}
           margin="normal"
           variant="outlined"
           fullWidth

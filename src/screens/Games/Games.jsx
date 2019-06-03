@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function winner(players) {
+function getWinners(players) {
   const winners = !!players && players.filter(p => p.winner).map(p => p.player);
 
   return !!winners && !!winners.length ? `🏆 ${winners.join(" / ")}` : "😐 No winner this time";
@@ -51,7 +51,7 @@ function Games() {
           <Card className={classes.card} key={id}>
             <CardContent>
               <Typography variant="h5" component="h2">
-                {winner(players)}
+                {getWinners(players)}
               </Typography>
               <Typography color="textSecondary">{date}</Typography>
             </CardContent>

@@ -17,16 +17,9 @@ function AddGame({ onClose, open, fullScreen }) {
   const [, dispatch] = store.useStore();
   const [form, setForm] = React.useState({});
 
-  const handleAddPlayer = p => {
-    let players = form.players || [];
-    players = players.filter(e => e.player !== p.player);
-    players = [...players, p];
-    setForm({
-      ...form,
-      players
-    });
-  };
-
+  /**
+   * On submit new game
+   */
   function onSubmit() {
     if (form) {
       dispatch({
@@ -38,23 +31,50 @@ function AddGame({ onClose, open, fullScreen }) {
     }
   }
 
-  function deletePlayer(player) {
-    const players = form.players.filter(e => e.player !== player);
+  console.log(form.players);
+
+  /**
+   * Add the given player to the list
+   * @param {Object} player the player to add
+   */
+  function handleAddPlayer(player) {
+    // get the list of players
+    let players = form.players || [];
+    players = players.filter(e => e.playerId !== player.playerId);
+    players = [...players, player];
     setForm({
       ...form,
       players
     });
   }
 
+  /**
+   * Remove the given player from the list
+   * @param {*} player the player to delete
+   */
+  function deletePlayer(player) {
+    const players = form.players.filter(e => e.playerId !== player);
+    setForm({
+      ...form,
+      players
+    });
+  }
+
+  /**
+   * Change the win state of the given player
+   * @param {string} playerId the player id
+   */
   function toggleWin(playerId) {
-    const player = form.players.find(p => p.player === playerId);
-    const players = form.players.filter(e => e.player !== playerId);
+    // get the player by is id
+    const player = form.players.find(p => p.playerId === playerId);
+    // get the other players
+    const otherPlayers = form.players.filter(e => e.playerId !== playerId);
 
     player.winner = !player.winner;
 
     setForm({
       ...form,
-      player: [...players, player]
+      player: [...otherPlayers, player]
     });
   }
 
@@ -68,7 +88,7 @@ function AddGame({ onClose, open, fullScreen }) {
       aria-labelledby="form-dialog-title"
       TransitionComponent={Grow}
     >
-      <DialogTitle id="form-dialog-title">New Game</DialogTitle>
+      <DialogTitle>New Game</DialogTitle>
       <DialogContent>
         <AddPlayer onChange={handleAddPlayer} />
         {form.players && form.players.length ? (
