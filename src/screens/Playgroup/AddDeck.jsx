@@ -6,7 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Grow from "@material-ui/core/Grow";
+import Slide from "@material-ui/core/Slide";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import store from "store";
@@ -65,7 +65,10 @@ function AddDeck({ onClose, open, fullScreen }) {
       open={open}
       onClose={onClose}
       aria-labelledby="form-dialog-title"
-      TransitionComponent={Grow}
+      TransitionComponent={Slide}
+      TransitionProps={{
+        direction: "up"
+      }}
     >
       <DialogTitle>New Deck</DialogTitle>
       <DialogContent>
@@ -115,4 +118,4 @@ function AddDeck({ onClose, open, fullScreen }) {
   );
 }
 
-export default withMobileDialog()(AddDeck);
+export default withMobileDialog()(React.memo(AddDeck));

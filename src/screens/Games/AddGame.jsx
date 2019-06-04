@@ -5,7 +5,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Grow from "@material-ui/core/Grow";
+import Slide from "@material-ui/core/Slide";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 
@@ -21,7 +21,7 @@ function AddGame({ onClose, open, fullScreen }) {
    * On submit new game
    */
   function onSubmit() {
-    if (form) {
+    if (form && form.players && form.players.length) {
       dispatch({
         type: "@GAMES/ADD",
         payload: form
@@ -39,7 +39,7 @@ function AddGame({ onClose, open, fullScreen }) {
     // get the list of players
     let players = form.players || [];
     players = players.filter(e => e.playerId !== player.playerId);
-    players = [...players, player];
+    players = [player, ...players];
     setForm({
       ...form,
       players
@@ -72,7 +72,7 @@ function AddGame({ onClose, open, fullScreen }) {
 
     setForm({
       ...form,
-      players: [...otherPlayers, player]
+      players: [player, ...otherPlayers]
     });
   }
 
@@ -84,7 +84,10 @@ function AddGame({ onClose, open, fullScreen }) {
       open={open}
       onClose={onClose}
       aria-labelledby="form-dialog-title"
-      TransitionComponent={Grow}
+      TransitionComponent={Slide}
+      TransitionProps={{
+        direction: "up"
+      }}
     >
       <DialogTitle>New Game</DialogTitle>
       <DialogContent>

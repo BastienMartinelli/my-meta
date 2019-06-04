@@ -83,4 +83,4 @@ function PlayerItem({ playerData, onDelete, onWin }) {
   );
 }
 
-export default PlayerItem;
+export default React.memo(PlayerItem);

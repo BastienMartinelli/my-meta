@@ -74,4 +74,4 @@ function Games() {
   );
 }
 
-export default Games;
+export default React.memo(Games);

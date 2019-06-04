@@ -59,4 +59,4 @@ function DeckItem({ name, colors = [] }) {
   );
 }
 
-export default DeckItem;
+export default React.memo(DeckItem);

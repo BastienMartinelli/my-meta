@@ -74,4 +74,4 @@ function Decks({ decks }) {
   );
 }
 
-export default Decks;
+export default React.memo(Decks);
