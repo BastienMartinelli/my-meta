@@ -1,7 +1,7 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import RestoreIcon from "@material-ui/icons/Restore";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+// import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import PeopleIcon from "@material-ui/icons/People";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
@@ -10,7 +10,7 @@ import Store from "store";
 import Games from "screens/Games/Games";
 import Playgroup from "screens/Playgroup";
 import Welcome from "screens/Welcome";
-import Stats from "screens/Stats";
+// import Stats from "screens/Stats";
 import Settings from "screens/Settings";
 import Router from "components/Router";
 import Persister from "components/Persister";
@@ -31,13 +31,13 @@ const routes = {
     Screen: Playgroup,
     icon: <PeopleIcon />
   },
-  stats: {
+  /* stats: {
     value: "stats",
     label: "Stats",
     long: "Game Statistics",
     Screen: Stats,
     icon: <TrendingUpIcon />
-  },
+  }, */
   settings: {
     value: "settings",
     label: "Settings",
