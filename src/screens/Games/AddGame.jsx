@@ -1,19 +1,16 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Slide from "@material-ui/core/Slide";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 
 import store from "store";
+import ScreenDialog from "components/ScreenDialog";
 import AddPlayer from "./AddPlayer";
 import PlayerItem from "./PlayerItem";
 
-function AddGame({ onClose, open, fullScreen }) {
+function AddGame({ onClose, open }) {
   const [, dispatch] = store.useStore();
   const [form, setForm] = React.useState({});
 
@@ -77,19 +74,7 @@ function AddGame({ onClose, open, fullScreen }) {
   }
 
   return (
-    <Dialog
-      fullWidth
-      maxWidth="sm"
-      fullScreen={fullScreen}
-      open={open}
-      onClose={onClose}
-      aria-labelledby="form-dialog-title"
-      TransitionComponent={Slide}
-      TransitionProps={{
-        direction: "up"
-      }}
-    >
-      <DialogTitle>New Game</DialogTitle>
+    <ScreenDialog open={open} onClose={onClose} title="New Game">
       <DialogContent>
         <AddPlayer onChange={handleAddPlayer} />
         {form.players && form.players.length ? (
@@ -108,8 +93,8 @@ function AddGame({ onClose, open, fullScreen }) {
           Add
         </Button>
       </DialogActions>
-    </Dialog>
+    </ScreenDialog>
   );
 }
 
-export default withMobileDialog()(React.memo(AddGame));
+export default React.memo(AddGame);

@@ -1,16 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/styles";
-import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Slide from "@material-ui/core/Slide";
 
 import store from "store";
+import ScreenDialog from "components/ScreenDialog";
 import avatars from "utils/avatars";
 
 const useStyles = makeStyles({
@@ -35,7 +32,7 @@ const useStyles = makeStyles({
   }
 });
 
-function AddMember({ onClose, open, fullScreen }) {
+function AddMember({ onClose, open }) {
   const [, dispatch] = store.useStore();
   const [name, setName] = React.useState("");
   const [av, setAv] = React.useState(null);
@@ -62,19 +59,7 @@ function AddMember({ onClose, open, fullScreen }) {
   };
 
   return (
-    <Dialog
-      fullWidth
-      maxWidth="sm"
-      fullScreen={fullScreen}
-      open={open}
-      onClose={onClose}
-      aria-labelledby="form-dialog-title"
-      TransitionComponent={Slide}
-      TransitionProps={{
-        direction: "up"
-      }}
-    >
-      <DialogTitle id="form-dialog-title">New member</DialogTitle>
+    <ScreenDialog open={open} onClose={onClose} title="New Member">
       <DialogContent>
         <TextField
           margin="normal"
@@ -110,8 +95,8 @@ function AddMember({ onClose, open, fullScreen }) {
           Add
         </Button>
       </DialogActions>
-    </Dialog>
+    </ScreenDialog>
   );
 }
 
-export default withMobileDialog()(AddMember);
+export default AddMember;

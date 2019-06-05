@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import withMobileDialog from "@material-ui/core/withMobileDialog";
-import Slide from "@material-ui/core/Slide";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import store from "store";
 import ManaPicker from "components/ManaPicker";
+import ScreenDialog from "components/ScreenDialog";
 import CommanderInput from "./CommanderInput";
 import FORMATS from "constants/formats";
 
-function AddDeck({ onClose, open, fullScreen }) {
+function AddDeck({ onClose, open }) {
   const [state, dispatch] = store.useStore();
   const [form, setForm] = useState({});
 
@@ -62,19 +59,7 @@ function AddDeck({ onClose, open, fullScreen }) {
   }
 
   return (
-    <Dialog
-      fullWidth
-      maxWidth="sm"
-      fullScreen={fullScreen}
-      open={open}
-      onClose={onClose}
-      aria-labelledby="form-dialog-title"
-      TransitionComponent={Slide}
-      TransitionProps={{
-        direction: "up"
-      }}
-    >
-      <DialogTitle>New Deck</DialogTitle>
+    <ScreenDialog open={open} onClose={onClose} title="New Deck">
       <DialogContent>
         <TextField
           margin="normal"
@@ -118,8 +103,8 @@ function AddDeck({ onClose, open, fullScreen }) {
           Add
         </Button>
       </DialogActions>
-    </Dialog>
+    </ScreenDialog>
   );
 }
 
-export default withMobileDialog()(React.memo(AddDeck));
+export default React.memo(AddDeck);

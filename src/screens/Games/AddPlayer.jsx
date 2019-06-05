@@ -4,7 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import AddIcon from "@material-ui/icons/Add";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import store from "store";
 
@@ -87,8 +87,8 @@ function AddPlayer({ onChange }) {
         </TextField>
       </Grid>
       <Grid item xs={2}>
-        <IconButton className={classes.button} onClick={handleSubmit}>
-          <AddIcon fontSize="large" />
+        <IconButton className={classes.button} onClick={handleSubmit} color="primary">
+          <AddCircleIcon fontSize="large" />
         </IconButton>
       </Grid>
     </Grid>

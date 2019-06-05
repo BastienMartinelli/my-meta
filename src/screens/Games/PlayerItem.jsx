@@ -67,7 +67,7 @@ function PlayerItem({ playerData, onDelete, onWin }) {
   return (
     <ListItem className={winner ? classes.winner : ""} button={!!onWin} onClick={handleWin}>
       <ListItemAvatar>
-        <Avatar src={player.avatar !== undefined && avatars[player.avatar]}>
+        <Avatar src={player.avatar ? avatars[player.avatar] : ""}>
           {!!player.name && player.name[0]}
         </Avatar>
       </ListItemAvatar>
