@@ -5,12 +5,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import Zoom from "@material-ui/core/Zoom";
 import Container from "@material-ui/core/Container";
 
 import store from "store";
+import AddFab from "components/AddFab";
 import AddGame from "./AddGame";
 import Game from "./Game";
 
@@ -18,11 +16,8 @@ const useStyles = makeStyles(() => ({
   card: {
     marginTop: 20
   },
-  fab: {
-    position: "fixed",
-    right: 0,
-    bottom: 60,
-    margin: 10
+  bottomDiv: {
+    height: 56
   }
 }));
 
@@ -42,9 +37,14 @@ function Games() {
   return (
     <Container maxWidth="md">
       {games && !!games.length ? (
-        games
-          .sort((a, b) => b.number - a.number)
-          .map((game, index) => <Game key={game.id} {...game} />)
+        <>
+          {games
+            .sort((a, b) => b.number - a.number)
+            .map((game, index) => (
+              <Game key={game.id} {...game} />
+            ))}
+          <div className={classes.bottomDiv} />
+        </>
       ) : (
         <Card className={classes.card}>
           <CardContent>
@@ -57,18 +57,7 @@ function Games() {
           </CardActions>
         </Card>
       )}
-      <Zoom
-        in
-        timeout={{
-          enter: 200,
-          exit: 200
-        }}
-        unmountOnExit
-      >
-        <Fab className={classes.fab} color="primary" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      </Zoom>
+      <AddFab onClick={handleOpen} />
       <AddGame onClose={handleClose} open={show} />
     </Container>
   );

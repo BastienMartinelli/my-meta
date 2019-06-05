@@ -52,8 +52,9 @@ function AddDeck({ onClose, open }) {
       payload: { name, colors, format }
     });
     onClose();
+
+    // clean and reinitialize to default format
     setForm({
-      ...form,
       format: FORMATS[state.favoriteFormat]
     });
   }

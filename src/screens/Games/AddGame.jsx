@@ -9,9 +9,10 @@ import store from "store";
 import ScreenDialog from "components/ScreenDialog";
 import AddPlayer from "./AddPlayer";
 import PlayerItem from "./PlayerItem";
+import { randomPick } from "utils/utils";
 
 function AddGame({ onClose, open }) {
-  const [, dispatch] = store.useStore();
+  const [state, dispatch] = store.useStore();
   const [form, setForm] = React.useState({});
 
   /**
@@ -73,6 +74,16 @@ function AddGame({ onClose, open }) {
     });
   }
 
+  function randomize() {
+    const randomDecks = randomPick(state.decks.map(deck => deck.id), form.players.length);
+    const newPlayers = form.players.map((player, i) => ({ ...player, deckId: randomDecks[i] }));
+
+    setForm({
+      ...form,
+      players: newPlayers
+    });
+  }
+
   return (
     <ScreenDialog open={open} onClose={onClose} title="New Game">
       <DialogContent>
@@ -86,6 +97,13 @@ function AddGame({ onClose, open }) {
         ) : null}
       </DialogContent>
       <DialogActions>
+        <Button
+          onClick={randomize}
+          color="secondary"
+          disabled={!form.players || !form.players.length}
+        >
+          Randomize Decks
+        </Button>
         <Button onClick={onClose} color="default">
           Cancel
         </Button>
