@@ -74,8 +74,12 @@ function AddGame({ onClose, open }) {
     });
   }
 
+  /**
+   * Randomize decks of the currents players
+   */
   function randomize() {
-    const randomDecks = randomPick(state.decks.map(deck => deck.id), form.players.length);
+    const allDecksIds = state.decks.map(deck => deck.id);
+    const randomDecks = randomPick(allDecksIds, form.players.length);
     const newPlayers = form.players.map((player, i) => ({ ...player, deckId: randomDecks[i] }));
 
     setForm({

@@ -63,15 +63,6 @@ function AddDeck({ onClose, open }) {
     <ScreenDialog open={open} onClose={onClose} title="New Deck">
       <DialogContent>
         <TextField
-          margin="normal"
-          id="name"
-          label="Deck name"
-          fullWidth
-          variant="outlined"
-          value={form.name || ""}
-          onChange={handleChange("name")}
-        />
-        <TextField
           id="format"
           select
           label="Format"
@@ -94,6 +85,15 @@ function AddDeck({ onClose, open }) {
             onSelect={handleCommanderSelect}
           />
         )}
+        <TextField
+          margin="normal"
+          id="name"
+          label="Deck name"
+          fullWidth
+          variant="outlined"
+          value={form.name || ""}
+          onChange={handleChange("name")}
+        />
         <ManaPicker onChange={handleChange("colors")} value={form.colors} />
       </DialogContent>
       <DialogActions>
