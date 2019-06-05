@@ -22,6 +22,7 @@ function AddDeck({ onClose, open, fullScreen }) {
   useEffect(() => {
     setForm({
       ...form,
+      colors: [],
       format: FORMATS[state.favoriteFormat]
     });
     // eslint-disable-next-line
@@ -54,7 +55,10 @@ function AddDeck({ onClose, open, fullScreen }) {
       payload: { name, colors, format }
     });
     onClose();
-    setForm({});
+    setForm({
+      ...form,
+      format: FORMATS[state.favoriteFormat]
+    });
   }
 
   return (

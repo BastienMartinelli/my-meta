@@ -140,10 +140,11 @@ const reducer = (state, { type, payload }) => {
 };
 
 /* get the player from the store */
-export const getDeckById = state => deckId => !!deckId && state.decks.find(d => d.id === deckId);
+export const getDeckById = state => deckId =>
+  !!deckId && (state.decks.find(d => d.id === deckId) || { name: "???" });
 
 /* get the deck from the store */
 export const getPlayerById = state => playerId =>
-  !!playerId && state.players.find(p => p.id === playerId);
+  !!playerId && (state.players.find(p => p.id === playerId) || { name: "???" });
 
 export default createStore(reducer, initial);
