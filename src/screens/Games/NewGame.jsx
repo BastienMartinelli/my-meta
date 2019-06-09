@@ -7,11 +7,11 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 
 import store from "store";
 import ScreenDialog from "components/ScreenDialog";
+import { randomPick } from "utils/utils";
 import AddPlayer from "./AddPlayer";
 import PlayerItem from "./PlayerItem";
-import { randomPick } from "utils/utils";
 
-function AddGame({ onClose, open }) {
+function NewGame({ onClose, open }) {
   const [state, dispatch] = store.useStore();
   const [form, setForm] = React.useState({});
 
@@ -119,4 +119,4 @@ function AddGame({ onClose, open }) {
   );
 }
 
-export default React.memo(AddGame);
+export default React.memo(NewGame);

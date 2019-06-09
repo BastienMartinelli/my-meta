@@ -9,7 +9,7 @@ import Container from "@material-ui/core/Container";
 
 import store from "store";
 import AddFab from "components/AddFab";
-import AddGame from "./AddGame";
+import NewGame from "./NewGame";
 import Game from "./Game";
 
 const useStyles = makeStyles(() => ({
@@ -58,7 +58,7 @@ function Games() {
         </Card>
       )}
       <AddFab onClick={handleOpen} />
-      <AddGame onClose={handleClose} open={show} />
+      <NewGame onClose={handleClose} open={show} />
     </Container>
   );
 }
