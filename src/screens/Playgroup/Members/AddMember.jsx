@@ -3,12 +3,11 @@ import Button from "@material-ui/core/Button";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/styles";
 
 import store from "store";
 import ScreenDialog from "components/ScreenDialog";
-import avatars from "utils/avatars";
+import Avatar from "components/Avatar";
 
 const useStyles = makeStyles({
   flex: {
@@ -54,10 +53,6 @@ function AddMember({ onClose, open }) {
     }
   }
 
-  const handleSelect = i => () => {
-    setAv(i);
-  };
-
   return (
     <ScreenDialog open={open} onClose={onClose} title="New Member">
       <DialogContent>
@@ -71,19 +66,15 @@ function AddMember({ onClose, open }) {
           onChange={handleChange}
         />
         <div className={classes.flex}>
-          <Avatar
-            className={av === null ? classes.selected : classes.notSelected}
-            onClick={handleSelect(null)}
-          >
-            {!!name && name[0]}
-          </Avatar>
-          {avatars.map((a, i) => (
+          {Avatar.list.map((a, i) => (
             <Avatar
               key={i}
+              index={i}
               className={av === i ? classes.selected : classes.notSelected}
-              onClick={handleSelect(i)}
-              src={a}
-            />
+              onClick={setAv}
+            >
+              {!!name && name[0]}
+            </Avatar>
           ))}
         </div>
       </DialogContent>
